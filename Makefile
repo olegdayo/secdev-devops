@@ -21,3 +21,11 @@ test:
 ci:
 	mkdir -p EVIDENCE/S08
 	pytest --junitxml=EVIDENCE/S08/test-report.xml -q
+
+.PHONY: compose
+compose:
+	docker compose up --build -d
+
+.PHONY: decompose
+decompose:
+	docker compose down

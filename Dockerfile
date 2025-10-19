@@ -1,10 +1,10 @@
 
 FROM python:3.11-slim
 
+WORKDIR /app
+
 # —— Runtime env ————————————————————————————————————————————————
 ENV PYTHONDONTWRITEBYTECODE=1         PYTHONUNBUFFERED=1         PIP_DISABLE_PIP_VERSION_CHECK=1
-
-WORKDIR /app
 
 # —— Deps ————————————————————————————————————————————————————————
 COPY requirements.txt ./
@@ -15,6 +15,13 @@ COPY app ./app
 COPY scripts ./scripts
 
 EXPOSE 8000
+
+# —— User setup ————————————————————————————————————————————————
+RUN useradd nonroot
+
+RUN chown -R nonroot . 
+
+USER nonroot
 
 # Инициализация БД на старте контейнера (простая семинарская логика)
 CMD python scripts/init_db.py && uvicorn app.main:app --host 0.0.0.0 --port 8000
