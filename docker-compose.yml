@@ -1,8 +1,7 @@
 
 services:
   web:
-    build: .
-    image: secdev-seed:latest
+    image: olegdayo/secdev-app:9db4adc2b903a8f6b9a699e57892140597e7afb9
     restart: unless-stopped
     ports:
       - "8000:8000"
