@@ -24,7 +24,7 @@ ci:
 
 .PHONY: compose
 compose:
-	docker compose up --build -d
+	docker compose up -d
 
 .PHONY: decompose
 decompose:
